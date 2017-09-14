@@ -22,9 +22,6 @@ import {
 // Import theme
 import createTheme from 'spectacle/lib/themes/default';
 
-// Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
-
 // Styled Component!
 import styled from 'styled-components';
 
@@ -63,8 +60,6 @@ const images = mapObjectIndexed(replace('/', ''))({
   perf1: require('./assets/performance.png'),
   perf2: require('./assets/perf2.jpg'),
 });
-
-preloader(images);
 
 const StyledBlockQuote = styled(BlockQuote)`
   > span {
