@@ -14,7 +14,6 @@ import {
   Text,
   S,
   Appear,
-  Markdown,
   Image,
   Notes,
   CodePane,
@@ -25,6 +24,8 @@ import createTheme from 'spectacle/lib/themes/default';
 
 // Styled Component!
 import styled from 'styled-components';
+
+import TweetEmbed from 'react-tweet-embed';
 
 // ramda stuff
 import mapObjectIndexed from 'ramda/src/mapObjIndexed';
@@ -67,6 +68,16 @@ const StyledBlockQuote = styled(BlockQuote)`
   }
 `;
 
+const Tweet = styled(TweetEmbed)`
+  transform: scale(1.3,1.3);
+`;
+
+const PaddedList = styled(List)`
+  > li {
+    margin: 1.5rem 0 0;
+  }
+`;
+
 export default class Presentation extends React.Component {
   render() {
     return (
@@ -90,7 +101,7 @@ export default class Presentation extends React.Component {
             <Text
               bold
               textSize="60"
-              margin="40px 0 0"
+              margin="2.5rem 0 0"
               textAlign="left"
               caps
               textColor="secondary"
@@ -98,11 +109,11 @@ export default class Presentation extends React.Component {
               And pretty awesome
             </Text>
           </Appear>
+          <Appear>
+            <Text textSize="20" textAlign="left" margin="3rem 0 0" bold>https://github.com/cvpcasada/2017-09-css-in-js-talk</Text>
+          </Appear>
         </Slide>
 
-        {/*<Slide id="wait-what" transition={["slide"]} bgColor="black" notes="You can even put notes on your slide. How awesome is that?">*/}
-        {/*<Image src={images[0]} margin="0px auto 40px" height="600px"/>*/}
-        {/*</Slide>*/}
         <Slide bgImage={images.what}>
           <Appear>
             <Heading
@@ -128,19 +139,19 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Heading size="2" fit caps>
+          <Heading size="2" fit caps textColor="secondary">
             css-in-js makes sense in component based ui libraries
           </Heading>
           <Logos>
-            <img src="https://facebook.github.io/react/img/logo.svg" />
-            <img src="https://cdn.rawgit.com/vuejs/art/d957d61d/logo.svg" />
-            <img src={images.preactLogo} />
+            <img src="https://facebook.github.io/react/img/logo.svg" alt="react"/>
+            <img src="https://cdn.rawgit.com/vuejs/art/d957d61d/logo.svg" alt="vue"/>
+            <img src={images.preactLogo} alt="preact"/>
           </Logos>
         </Slide>
 
         <Slide>
-          <Heading size="5">Just some of the popular ones</Heading>
-          <Heading size="3" caps>
+          <Heading size="5" textColor="secondary">Just some of the popular ones</Heading>
+          <Heading size="3" caps textColor="secondary">
             CSS-in-JS libraries
           </Heading>
           <Logos>
@@ -204,7 +215,7 @@ export default class Presentation extends React.Component {
           <Heading size="2" caps>
             Isolation and Reuse
           </Heading>
-          <Text>
+          <Text textColor="secondary">
             Focus instead on building UI Components that can be reused.
           </Text>
         </Slide>
@@ -217,28 +228,29 @@ export default class Presentation extends React.Component {
             methodologies help but that is another thing to study. - Lets just
             make CSS as compile target.
           </Notes>
-          <List unordered>
-            <ListItem>CSS has no scopes, everything is global</ListItem>
-            <ListItem>
+          <BlockQuote><Tweet id="907773940977754112"/></BlockQuote>
+          <PaddedList>
+            <ListItem textSize="24pt">CSS has no scopes, everything is global</ListItem>
+            <ListItem textSize="24pt">
               Naming methodologies like BEM or SMACSS, etc.. solves this but its
               another convention we have to conform
             </ListItem>
-            <ListItem>
-              CSS Modules is a next step, but it requires a build tool config
+            <ListItem textSize="24pt">
+              CSS Modules is great, but it requires a build tool config
               like webpack
             </ListItem>
-          </List>
+          </PaddedList>
         </Slide>
 
         <Slide>
           <Heading size="2" fit caps>
             Interaction with Javascript environment
           </Heading>
-          <List unordered>
+          <PaddedList>
             <ListItem>Full access to programming language features</ListItem>
             <ListItem>SASS Mixins vs just functions, see </ListItem>
             <ListItem>Can accept props</ListItem>
-          </List>
+          </PaddedList>
         </Slide>
 
         <Slide>
@@ -249,7 +261,7 @@ export default class Presentation extends React.Component {
           <Heading size="2" caps>
             Share-ability
           </Heading>
-          <List unordered>
+          <List>
             <ListItem>just `npm install` anything</ListItem>
 
             <Logos>
@@ -267,11 +279,11 @@ export default class Presentation extends React.Component {
           <Heading size="2" caps>
             Not just for the web
           </Heading>
-          <List unordered>
+          <PaddedList>
             <ListItem>React is available Everywhere</ListItem>
             <ListItem>Supports native mobile apps through React Native</ListItem>
             <ListItem>Virtual Reality Apps</ListItem>
-          </List>
+          </PaddedList>
         </Slide>
 
 
@@ -282,7 +294,7 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Text fit caps>
+          <Text fit caps textColor="secondary">
             1. Isn't it bad practice to mix view logic and code
           </Text>
           <Heading
@@ -330,8 +342,8 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Text fit caps>
-            2. Isn't it the same thing as inlining CSS
+          <Text fit caps textColor="secondary">
+            2. Isn't it the same thing as inlining CSS.
           </Text>
           <Heading
             fill
@@ -340,9 +352,9 @@ export default class Presentation extends React.Component {
             margin="5rem 0 0"
             textColor="secondary"
           >
-            Most libs now compile to raw css and it is injected into a page
+            Most libs now compile to raw css and it is injected into a page.
           </Heading>
-          {/* via css file or style tag */}
+          <Notes>Via a CSS file or style tag</Notes>
         </Slide>
 
         <Slide>
@@ -356,7 +368,7 @@ export default class Presentation extends React.Component {
             margin="5rem 0 0"
             textColor="secondary"
           >
-            Its pretty fast
+            Its pretty fast.
           </Heading>
         </Slide>
 
@@ -366,8 +378,8 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Text>If you do server-side rendering and your code have conditional styles. you can ship less code for every server side render</Text>
-          <Text margin="2rem 0 0"><S type="bold" textColor="quarternary">Critical CSS</S> - the CSS required to do a first render of a page. It is suggested you inline this CSS in order to improve initial page load times.</Text>
+          <Text textColor="secondary">If you do server-side rendering and your code have conditional styles. you can ship less code for every server side render</Text>
+          <Text margin="2rem 0 0" textColor="secondary"><S type="bold" textColor="quarternary">Critical CSS</S> - the CSS required to do a first render of a page. It is suggested you inline this CSS in order to improve initial page load times.</Text>
           <Notes>
             - This is normally hard to do, but it is natural in css-in-js
             - fairly manual process
@@ -392,17 +404,32 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Heading>CSS-IN-JS is still pretty new</Heading>
+          <Heading textColor="secondary">CSS-IN-JS is still pretty new</Heading>
         </Slide>
 
         <Slide>
-          <Heading size="5" caps>Concerns with keeping up... Many ways to do things. Web development moves very fast.</Heading>
+          <Heading size="5" caps textColor="secondary">Concerns with keeping up... Many ways to do things. Web development moves very fast.</Heading>
         </Slide>
 
         <Slide>
-          <Heading size="5" caps>If you are not ready, just wait.</Heading>
-          <Heading size="5" caps margin="3rem 0 0">if you are ready, have fun!</Heading>
+          <Heading size="5" caps textColor="secondary">If you are not ready, just wait.</Heading>
+          <Heading size="5" caps margin="3rem 0 0" textColor="secondary">if you are ready, have fun!</Heading>
         </Slide>
+
+        <Slide>
+          <Heading size="5" caps textColor="secondary">If you are not ready, just wait.</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading size="1" caps textColor="secondary">END</Heading>
+          <Text textAlign="left" margin="2rem 0 0" textColor="secondary" caps bold>Additional resources:</Text>
+          <PaddedList>
+            <ListItem>Mark Dalgesh, A Unified Styling Language <br/> https://medium.com/seek-blog/a-unified-styling-language-d0c208de2660</ListItem>
+            <ListItem>James Rauhut, CSS-in-JS is Insanely Good <br/> https://vimeo.com/230614037</ListItem>
+            <ListItem>Syntax fm podcast, Episode 10 <br/> https://syntax.fm/show/010/css-in-js-drama-free</ListItem>
+          </PaddedList>
+        </Slide>
+
       </Deck>
     );
   }
