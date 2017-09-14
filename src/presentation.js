@@ -22,6 +22,9 @@ import {
 // Import theme
 import createTheme from 'spectacle/lib/themes/default';
 
+// Import image preloader util
+import preloader from "spectacle/lib/utils/preloader";
+
 // Styled Component!
 import styled from 'styled-components';
 
@@ -58,8 +61,10 @@ const images = mapObjectIndexed(replace('/', ''))({
   preactLogo: require('./assets/preact.svg'),
   what: require('./assets/stahp.png'),
   perf1: require('./assets/performance.png'),
-  perf2: require('./assets/perf2.jpg')
+  perf2: require('./assets/perf2.jpg'),
 });
+
+preloader(images);
 
 const StyledBlockQuote = styled(BlockQuote)`
   > span {
@@ -68,9 +73,7 @@ const StyledBlockQuote = styled(BlockQuote)`
   }
 `;
 
-const Tweet = styled(TweetEmbed)`
-  transform: scale(1.3,1.3);
-`;
+const Tweet = styled(TweetEmbed)`transform: scale(1.3, 1.3);`;
 
 const PaddedList = styled(List)`
   > li {
@@ -89,7 +92,7 @@ export default class Presentation extends React.Component {
       >
         <Slide transition={['zoom']} bgColor="primary">
           <Text textSize="40" textAlign="left">
-            A friendly disclamer:
+            A friendly disclaimer:
           </Text>
           <Text caps textSize="100" bold textAlign="left" textColor="secondary">
             <S type="bold" textColor="tertiary">
@@ -110,8 +113,11 @@ export default class Presentation extends React.Component {
             </Text>
           </Appear>
           <Appear>
-            <Text textSize="20" textAlign="left" margin="3rem 0 0" bold>https://github.com/cvpcasada/2017-09-css-in-js-talk</Text>
+            <Text textSize="20" textAlign="left" margin="3rem 0 0" bold>
+              https://github.com/cvpcasada/2017-09-css-in-js-talk
+            </Text>
           </Appear>
+          <Notes>Lets do some quick intro here</Notes>
         </Slide>
 
         <Slide bgImage={images.what}>
@@ -143,14 +149,26 @@ export default class Presentation extends React.Component {
             css-in-js makes sense in component based ui libraries
           </Heading>
           <Logos>
-            <img src="https://facebook.github.io/react/img/logo.svg" alt="react"/>
-            <img src="https://cdn.rawgit.com/vuejs/art/d957d61d/logo.svg" alt="vue"/>
-            <img src={images.preactLogo} alt="preact"/>
+            <img
+              src="https://facebook.github.io/react/img/logo.svg"
+              alt="react"
+            />
+            <img
+              src="https://cdn.rawgit.com/vuejs/art/d957d61d/logo.svg"
+              alt="vue"
+            />
+            <img src={images.preactLogo} alt="preact" />
           </Logos>
+          <Notes>
+            If your'e not using component based ui libraries, then css-in-js
+            might not be for you
+          </Notes>
         </Slide>
 
         <Slide>
-          <Heading size="5" textColor="secondary">Just some of the popular ones</Heading>
+          <Heading size="5" textColor="secondary">
+            Just some of the popular ones
+          </Heading>
           <Heading size="3" caps textColor="secondary">
             CSS-in-JS libraries
           </Heading>
@@ -169,6 +187,7 @@ export default class Presentation extends React.Component {
               <span>{`👩‍🎤`}</span> <span>Emotion</span>
             </CSSLibsLogo>
           </Logos>
+          <Notes>Its funny that these popular libraries uses emoji as their brand logos</Notes>
         </Slide>
 
         {/*<Slide bgColor="code">*/}
@@ -218,6 +237,7 @@ export default class Presentation extends React.Component {
           <Text textColor="secondary">
             Focus instead on building UI Components that can be reused.
           </Text>
+          <Notes>The key here is that we try to scope our css to our components, avoiding complex cascades</Notes>
         </Slide>
 
         <Slide>
@@ -228,16 +248,20 @@ export default class Presentation extends React.Component {
             methodologies help but that is another thing to study. - Lets just
             make CSS as compile target.
           </Notes>
-          <BlockQuote><Tweet id="907773940977754112"/></BlockQuote>
+          <BlockQuote>
+            <Tweet id="907773940977754112" />
+          </BlockQuote>
           <PaddedList>
-            <ListItem textSize="24pt">CSS has no scopes, everything is global</ListItem>
+            <ListItem textSize="24pt">
+              CSS has no scopes, everything is global
+            </ListItem>
             <ListItem textSize="24pt">
               Naming methodologies like BEM or SMACSS, etc.. solves this but its
               another convention we have to conform
             </ListItem>
             <ListItem textSize="24pt">
-              CSS Modules is great, but it requires a build tool config
-              like webpack
+              CSS Modules is great, but it requires a build tool config like
+              webpack
             </ListItem>
           </PaddedList>
         </Slide>
@@ -281,11 +305,12 @@ export default class Presentation extends React.Component {
           </Heading>
           <PaddedList>
             <ListItem>React is available Everywhere</ListItem>
-            <ListItem>Supports native mobile apps through React Native</ListItem>
+            <ListItem>
+              Supports native mobile apps through React Native
+            </ListItem>
             <ListItem>Virtual Reality Apps</ListItem>
           </PaddedList>
         </Slide>
-
 
         <Slide>
           <Heading size="2" caps>
@@ -372,24 +397,34 @@ export default class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide><Image src={images.perf1} fill height="650"/></Slide>
         <Slide>
-          <Image src={images.perf2} fill height="650"/>
+          <Image src={images.perf1} fill height="650" />
+        </Slide>
+        <Slide>
+          <Image src={images.perf2} fill height="650" />
         </Slide>
 
         <Slide>
-          <Text textColor="secondary">If you do server-side rendering and your code have conditional styles. you can ship less code for every server side render</Text>
-          <Text margin="2rem 0 0" textColor="secondary"><S type="bold" textColor="quarternary">Critical CSS</S> - the CSS required to do a first render of a page. It is suggested you inline this CSS in order to improve initial page load times.</Text>
+          <Text textColor="secondary">
+            If you do server-side rendering and your code have conditional
+            styles. you can ship less code for every server side render
+          </Text>
+          <Text margin="2rem 0 0" textColor="secondary">
+            <S type="bold" textColor="quarternary">
+              Critical CSS
+            </S>{' '}
+            - the CSS required to do a first render of a page. It is suggested
+            you inline this CSS in order to improve initial page load times.
+          </Text>
           <Notes>
-            - This is normally hard to do, but it is natural in css-in-js
-            - fairly manual process
-            - requires build tools for automation
-            - Perceived effort outweighs work.
+            - This is normally hard to do, but it is natural in css-in-js -
+            fairly manual process - requires build tools for automation -
+            Perceived effort outweighs work.
           </Notes>
         </Slide>
 
         <Slide>
-          <Text fit caps>
+          <Text fit caps textColor="secondary">
             4. What if javascript is disabled on the client?
           </Text>
           <Heading
@@ -408,28 +443,49 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Heading size="5" caps textColor="secondary">Concerns with keeping up... Many ways to do things. Web development moves very fast.</Heading>
+          <Heading size="5" caps textColor="secondary">
+            Concerns with keeping up...<br/><br/> Many ways to do things.<br/><br/>  Web development
+            moves very fast.
+          </Heading>
         </Slide>
 
         <Slide>
-          <Heading size="5" caps textColor="secondary">If you are not ready, just wait.</Heading>
-          <Heading size="5" caps margin="3rem 0 0" textColor="secondary">if you are ready, have fun!</Heading>
+          <Heading size="5" caps textColor="secondary">
+            If you are not ready, just wait.
+          </Heading>
+          <Heading size="5" caps margin="3rem 0 0" textColor="secondary">
+            if you are ready, have fun!
+          </Heading>
         </Slide>
 
         <Slide>
-          <Heading size="5" caps textColor="secondary">If you are not ready, just wait.</Heading>
-        </Slide>
-
-        <Slide>
-          <Heading size="1" caps textColor="secondary">END</Heading>
-          <Text textAlign="left" margin="2rem 0 0" textColor="secondary" caps bold>Additional resources:</Text>
+          <Heading size="1" caps textColor="secondary">
+            END
+          </Heading>
+          <Text
+            textAlign="left"
+            margin="2rem 0 0"
+            textColor="secondary"
+            caps
+            bold
+          >
+            Additional resources:
+          </Text>
           <PaddedList>
-            <ListItem>Mark Dalgesh, A Unified Styling Language <br/> https://medium.com/seek-blog/a-unified-styling-language-d0c208de2660</ListItem>
-            <ListItem>James Rauhut, CSS-in-JS is Insanely Good <br/> https://vimeo.com/230614037</ListItem>
-            <ListItem>Syntax fm podcast, Episode 10 <br/> https://syntax.fm/show/010/css-in-js-drama-free</ListItem>
+            <ListItem>
+              Mark Dalgesh, A Unified Styling Language <br />{' '}
+              https://medium.com/seek-blog/a-unified-styling-language-d0c208de2660
+            </ListItem>
+            <ListItem>
+              James Rauhut, CSS-in-JS is Insanely Good <br />{' '}
+              https://vimeo.com/230614037
+            </ListItem>
+            <ListItem>
+              Syntax fm podcast, Episode 10 <br />{' '}
+              https://syntax.fm/show/010/css-in-js-drama-free
+            </ListItem>
           </PaddedList>
         </Slide>
-
       </Deck>
     );
   }
